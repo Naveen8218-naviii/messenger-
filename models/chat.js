@@ -16,7 +16,8 @@ type:String,
 maxLength:50,
     },
 
-    creted_at:{
+
+    created_at:{
         type:Date,
         required:true
     }
