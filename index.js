@@ -28,7 +28,7 @@
         res.render("index.ejs",{chats})
     })
 app.get("/chats/new",(req,res)=>{
-    res.render("new.ejs")
+    res.render("new.ejs" )
 })
 
 app.post("/chats",(req,res)=>{
@@ -43,7 +43,22 @@ app.post("/chats",(req,res)=>{
     newchats.save().then(()=>console.log("chat save"))
     res.redirect("/chats")
 })
+   
+    app.get("/chats/:id/edit",async(req,res)=>{
+        let {id}=req.params;
+        let chat =await Chat.findById(id)
+        res.render("edit.ejs" , {chat})
+    })
 
+    app.put("/chats/:id",async(req,res)=>{
+        let {id}=req.params;
+        let{msg:newMsg}=req.body;
+        let updateChat=await Chat.findByIdAndUpdate(
+            id,{msg:newMsg},
+            {runValidators:true,new:true}
+        )
+        res.redirect("/chats")
+    })
     app.listen(3000,()=>{
         console.log("chal gya")
     })

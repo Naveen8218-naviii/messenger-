@@ -31,3 +31,12 @@ async function main() {
 ]
 
 Chat.insertMany(allChats);
+
+/*   <h1>Edit message</h1>
+    <p>chat ID : <%= chat.id %></p>
+  <p>  <%=chat.from%> To<%=chat.to%></p>
+
+    <form >
+<textarea name="msg" rows="10" cols="35"><%= chat.msg%></textarea>
+<button> Edit </button>
+    </form>*/
