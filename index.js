@@ -14,7 +14,7 @@
     app.set("views", path.join(__dirname,"views"));
     app.set("view engine","ejs");
     app.use(express.static(path.join(__dirname,"public")))
-
+    app.use(express.urlencoded({extended:true}))
 
 
     app.get("/",(req,res)=>{
@@ -31,6 +31,18 @@ app.get("/chats/new",(req,res)=>{
     res.render("new.ejs")
 })
 
+app.post("/chats",(req,res)=>{
+    let {from,to,msg}=req.body;
+    let newchats=new Chat({
+        from:from,
+        to:to,
+        msg:msg,
+        created_at:new Date()
+    })
+ 
+    newchats.save().then(()=>console.log("chat save"))
+    res.redirect("/chats")
+})
 
     app.listen(3000,()=>{
         console.log("chal gya")
